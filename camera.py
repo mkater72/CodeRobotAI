@@ -117,11 +117,6 @@ thread = threading.Thread(target=capture_frames)
 thread.daemon = True
 thread.start()
 
-# Создаем объект для записи видео
-output_file = "output.mp4"
-fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Кодек для MP4
-out = cv2.VideoWriter(output_file, fourcc, fps, (width, height))
-
 # Функция для повышения резкости
 def sharpen_image(image):
     gaussian = cv2.GaussianBlur(image, (0,0), 3)
@@ -181,7 +176,6 @@ try:
             sharpened_frame = sharpen_image(undistorted_frame)
 
             # Записываем кадр в видеофайл
-            out.write(sharpened_frame)
 
             # Изменяем размер кадра под размер окна
             resized_frame = cv2.resize(sharpened_frame, (window_width, window_height))
@@ -263,5 +257,4 @@ try:
 finally:
     # Освобождаем ресурсы и закрываем окна
     cap.release()
-    out.release()
     cv2.destroyAllWindows()
