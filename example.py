@@ -1,8 +1,14 @@
 import socket
 import time
 
-host = "IP address"
+host = "192.168.1.1"
 port = 2001
+
+def Forward():
+    send_command(b'\xff\x00\x01\x00\xff')
+
+def Back():
+    send_command(b'\xff\x00\x02\x00\xff')
 
 
 def send_command(command):
@@ -32,6 +38,15 @@ def send_command(command):
 
 
 # Первая команда
-command = b'\xff\x06\x01\x00\xff'  # Пример отправки команды
+# command = b'\xff\x06\x01\x00\xff'  # Пример отправки команды
+
+while True:
+    direction = input("Введите команду для управления роботом: W-вперед; S-назад; D-вправо; A-влево: ")
+    if direction == "w":
+        Forward()
+
+    if direction == "s":
+        Back()
+        
 result = send_command(command)
-print('Команда на установку цвета отправлена: ', result)
+# print('Команда на установку цвета отправлена: ', result)
