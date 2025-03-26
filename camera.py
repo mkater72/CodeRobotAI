@@ -1,4 +1,4 @@
-import cv2
+import c
 import numpy as np
 import threading
 import queue
